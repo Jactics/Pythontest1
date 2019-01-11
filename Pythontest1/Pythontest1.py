@@ -1,6 +1,6 @@
 import pymssql
 import mpl_finance
-
+import pyodbc
 class Candle1():
     def __init__(self, open1, high1, low1, close1):
         self.open = open1
@@ -59,3 +59,23 @@ with pymssql.connect(host=r'DESKTOP-8OMB7OV\SQLEXPRESS',user = 'sa', password ='
         #cursor.execute(sql,('256125',7))
         conn.commit()
 
+pass
+
+
+
+def candlefromodbc(startdt,numofcandle):
+    with pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=127.0.0.1;DATABASE=dbcldata;UID=sa;PWD=qshmxh') as conn:
+        with conn.cursor() as cursor:
+            #sql = "select top("+str(numofcandle)+") * from CL18021811 where _datetime >= "+ startdt
+            sql = "select top("+str(numofcandle)+") * from CL18021811 where _datetime >= "+'\'2018-03-02T02:01\''
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            sqlresult.append(result)
+            conn.commit()
+    pass
+
+candlefromodbc('2018-03-02 00:00',10)
+
+str1 ="_datetime >= "
+str2 ="'2018-03-02T02:01'"
+teststr = str1+str2

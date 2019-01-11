@@ -238,6 +238,7 @@ def setinterval(interval):
     Low.clear()
     CandleVolume.clear()
     
+
     pass
 
 
